@@ -1,0 +1,14 @@
+print("hello", end=" ")
+
+
+name = input("please enter your name: ")
+
+
+print("That's a wonderful name",name)
+
+
+
+age = input("please enter your age: ")
+
+
+print("That's, nice age",age,"!")
