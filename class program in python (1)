@@ -1,0 +1,13 @@
+class Laptop:
+    def __init__(self, brand, model, ram):
+        self.brand = brand
+        self.model = model
+        self.ram = ram
+    def display_info(self):
+        print(f"Brand: {self.brand}")
+        print(f"Model: {self.model}")
+        print(f"RAM: {self.ram} GB")
+
+laptop1 = Laptop("MacBook Air","M1","8")
+
+laptop1.display_info()
