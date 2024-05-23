@@ -1,0 +1,15 @@
+class Car:
+    def __init__(self, name, model, year, price):
+        self.name = name
+        self.model = model
+        self.year = year
+        self.price = price
+
+    def get_info(self):
+        """Return a string containing the car's information."""
+        return f"{self.year} {self.name} {self.model}, Price: ${self.price}"
+
+
+audi_q3 = Car("Audi", "Q3", 2023, 7,57392)
+
+print(audi_q3.get_info())
