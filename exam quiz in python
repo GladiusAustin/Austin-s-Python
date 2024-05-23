@@ -1,0 +1,60 @@
+import random
+
+def math_quiz():
+    num1 = random.randint(1, 10)
+    num2 = random.randint(1, 10)
+    correct_answer = num1 + num2
+    user_answer = int(input(f"What is {num1} + {num2}? "))
+    if user_answer == correct_answer:
+        print("Correct!")
+    else:
+        print(f"Sorry, the correct answer is {correct_answer}.")
+
+def science_quiz():
+    questions = [
+        ("What is the boiling point of water in Celsius?", 100),
+        ("What is the chemical symbol for water?", "H2O"),
+        ("Which planet is known as the Red Planet?", "Mars"),
+        ("What is the process by which plants make their food?", "Photosynthesis")
+    ]
+    question, correct_answer = random.choice(questions)
+    user_answer = input(question + " ")
+    if user_answer.lower() == str(correct_answer).lower():
+        print("Correct!")
+    else:
+        print(f"Sorry, the correct answer is {correct_answer}.")
+
+def geography_quiz():
+    countries = {
+        "France": "Paris",
+        "United States": "Washington D.C.",
+        "Japan": "Tokyo",
+        "Brazil": "Brasília"
+    }
+    country = random.choice(list(countries.keys()))
+    correct_answer = countries[country]
+    user_answer = input(f"What is the capital of {country}? ")
+    if user_answer.lower() == correct_answer.lower():
+        print("Correct!")
+    else:
+        print(f"Sorry, the correct answer is {correct_answer}.")
+
+def main():
+    print("Welcome to the Learning Quiz!")
+    print("Choose a subject:")
+    print("1. Math")
+    print("2. Science")
+    print("3. Geography")
+    choice = input("Enter your choice (1/2/3): ")
+
+    if choice == '1':
+        math_quiz()
+    elif choice == '2':
+        science_quiz()
+    elif choice == '3':
+        geography_quiz()
+    else:
+        print("Invalid choice. Please choose a number from 1 to 3.")
+
+if __name__ == "__main__":
+    main()
