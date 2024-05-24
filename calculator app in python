@@ -1,0 +1,23 @@
+import tkinter as tk
+
+def calculate():
+    try:
+        result.set(eval(entry.get()))
+    except:
+        result.set("Error")
+
+root = tk.Tk()
+root.title("Calculator")
+
+entry = tk.Entry(root, width=20)
+entry.pack()
+
+button = tk.Button(root, text="Calculate", command=calculate)
+button.pack()
+
+result = tk.StringVar()
+label = tk.Label(root, textvariable=result)
+label.pack()
+
+
+root.mainloop()
