@@ -1,0 +1,82 @@
+import turtle
+
+# Set up the screen
+screen = turtle.Screen()
+screen.title(" Turtle Calculator")
+screen.bgcolor("Dark Orange")  # Background color for contrase
+screen.setup(width=400, height=600)  
+
+# Create a turtle for drawing buttons and text
+drawer = turtle.Turtle()
+drawer.penup()
+drawer.hideturtle()
+
+# Create a turtle for displaying the output
+display = turtle.Turtle()
+display.penup()
+display.hideturtle()
+display.goto(0, 250)
+display.write("0", align="center", font=("Arial", 32, "normal"))
+
+
+current_input = ""
+result = 0
+
+# Function to draw a circular button
+def draw_button(x, y, radius, label):
+    drawer.goto(x, y - radius)  
+    drawer.pendown()
+    drawer.color("white", "black")  
+    drawer.begin_fill()
+    drawer.circle(radius)
+    drawer.end_fill()
+    drawer.penup()
+    drawer.goto(x, y - 20)  # Adjust position of text inside the circle
+    drawer.color("white")  # Set text color to white
+    drawer.write(label, align="center", font=("Arial", 18, "normal"))
+
+# Draw calculator buttons (circular)
+buttons = [
+    ("7", -100, -50), ("8", 0, -50), ("9", 100, -50), ("/", 200, -50),
+    ("4", -100, -150), ("5", 0, -150), ("6", 100, -150), ("*", 200, -150),
+    ("1", -100, -250), ("2", 0, -250), ("3", 100, -250), ("-", 200, -250),
+    ("0", 0, -350), ("AC", -100, -350), ("=", 100, -350), ("+", 200, -350)
+]
+
+# Draw buttons using the draw_button function with a radius for circular effect
+for label, x, y in buttons:
+    draw_button(x, y, 45, label)  # Adjust the radius for iPhone-style buttons
+
+# Function to update the display
+def update_display(text):
+    display.clear()
+    display.write(text, align="center", font=("Arial", 32, "normal"))
+
+# Function to handle button click
+def on_button_click(x, y):
+    global current_input, result
+    for label, bx, by in buttons:
+        if (bx - 45 < x < bx + 45) and (by - 45 < y < by + 45):  # Check within the circle
+            if label.isdigit() or label == "0":
+                current_input += label
+                update_display(current_input)
+            elif label in "+-*/":
+                current_input += f" {label} "
+                update_display(current_input)
+            elif label == "=":
+                try:
+                    result = eval(current_input)
+                    update_display(str(result))
+                except:
+                    update_display("Error")
+                current_input = ""
+            elif label == "C":
+                current_input = ""
+                update_display("0")
+            break
+
+# Listen for clicks
+screen.onclick(on_button_click)
+
+# Start the event loop
+turtle.done()
