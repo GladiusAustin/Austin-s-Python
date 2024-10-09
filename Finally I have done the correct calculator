@@ -1,0 +1,70 @@
+import turtle
+
+screen = turtle.Screen()
+screen.title(" Turtle Calculator")
+screen.bgcolor("orange")
+screen.setup(width=400, height=600)
+
+button_turtle = turtle.Turtle()
+button_turtle.penup()
+button_turtle.hideturtle()
+
+display_turtle = turtle.Turtle()
+display_turtle.penup()
+display_turtle.hideturtle()
+display_turtle.goto(0, 250)
+display_turtle.write("0", align="center", font=("Arial", 60, "normal"))
+
+current_input = ""
+result = 0
+
+def draw_button(x, y, label):
+    button_turtle.goto(x, y)
+    button_turtle.pendown()
+    button_turtle.color("white", "black")
+    button_turtle.begin_fill()
+    button_turtle.circle(40)
+    button_turtle.end_fill()
+    button_turtle.penup()
+    button_turtle.goto(x, y - 20)
+    button_turtle.color("white")
+    button_turtle.write(label, align="center", font=("Arial", 30, "normal"))
+
+buttons = [
+    ("7", -100, 100), ("8", 0, 100), ("9", 100, 100), ("/", 200, 100),
+    ("4", -100, 0),  ("5", 0, 0),   ("6", 100, 0),   ("*", 200, 0),
+    ("1", -100, -100), ("2", 0, -100), ("3", 100, -100), ("-", 200, -100),
+    ("C", -100, -200), ("0", 0, -200), ("=", 100, -200), ("+", 200, -200)
+]
+
+for label, x, y in buttons:
+    draw_button(x, y, label)
+
+def update_display(text):
+    display_turtle.clear()
+    display_turtle.write(text, align="center", font=("Arial", 60, "normal"))
+
+def on_button_click(x, y):
+    global current_input, result
+    for label, bx, by in buttons:
+        if (bx - 40 < x < bx + 40) and (by - 40 < y < by + 40):
+            if label.isdigit() or label == "0":
+                current_input += label
+                update_display(current_input)
+            elif label in "+-*/":
+                current_input += label
+                update_display(current_input)
+            elif label == "=":
+                try:
+                    result = eval(current_input)
+                    update_display(str(result))
+                except:
+                    update_display("Error !")
+                current_input = ""
+            elif label == "C":
+                current_input = ""
+                update_display("0")
+            break
+
+screen.onclick(on_button_click)
+turtle.done()
